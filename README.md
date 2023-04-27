@@ -11,7 +11,7 @@
 
 ## Live Demo
 
-[Link](https://hotel-booking-pink.vercel.app/)
+[Link](https://track-info.vercel.app/)
 
 ## Getting Started
 
@@ -29,7 +29,7 @@ To clone this project :
 - [GitHub](https://github.com/Wes-Isaac)
 - [LinkedIn](https://www.linkedin.com/in/yishak-wesego-b404851a7/)
 
-Feel free to check the [issues page](https://github.com/Wes-Isaac/hotel_booking/issues/new).
+Feel free to check the [issues page](https://github.com/Wes-Isaac/Track-Info/issues/new).
 
 ## Show your support
 
