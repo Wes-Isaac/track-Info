@@ -1,50 +1,50 @@
-import { DocumentData, collection, deleteDoc, doc, getDocs } from 'firebase/firestore'
+import { DocumentData, collection, deleteDoc, doc, getDocs, onSnapshot } from 'firebase/firestore'
 import { auth, db } from '../lib/config'
 import { useCallback, useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
 export default function Home() {
 
-  const [employees, setEmployees] = useState([] as any
-    //   as {
-    //   id: string;
-    //   data: DocumentData;
-    // }[]
+  const [employees, setEmployees] = useState([] as {
+    id: string,
+    first_name: string,
+    last_name: string,
+    position: string,
+    salary: number
+  }[]
   );
   const navigate = useNavigate()
   const [user] = useAuthState(auth)
 
-  const getUsers = async () => {
-    const snapshot = await getDocs(collection(db, 'employees'))
-    return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
-  }
-
-  const fetchUsers = useCallback(async () => {
-    const data = await getUsers();
-    setEmployees(data)
+  const fetch = useCallback(() => {
+    onSnapshot(collection(db, 'employees'), (snap) => {
+      const data = []
+      snap.docs.forEach((doc) => {
+        data.push({ ...doc.data(), id: doc.id })
+      })
+      setEmployees(data)
+    })
   }, [])
   useEffect(() => {
-    fetchUsers()
-  }, [fetchUsers])
+    fetch()
+  }, [fetch])
 
   const onEdit = (data: any) => {
     navigate(`/edit/${data.id}`, {
       state: data
     })
-    console.log(data)
 
   }
+
 
   const onDelete = async (id: string) => {
     const docRef = doc(db, 'employees', id)
     const doIt = window.confirm('are you sure!')
     if (doIt) {
       await deleteDoc(docRef)
-      console.log('employee deleted')
     }
   }
 
-  console.log('employees', employees)
   return (
     <div className=' flex justify-center items-center h-screen'>
       {user ? <table className="text-sm text-left text-gray-900 ">

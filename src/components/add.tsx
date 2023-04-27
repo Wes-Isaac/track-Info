@@ -16,7 +16,6 @@ export default function Add() {
   const [user] = useAuthState(auth)
   const { state } = useLocation()
   const navigate = useNavigate()
-  console.log('state', state)
   const { register, handleSubmit, reset, formState: { errors } } = useForm<Inputs>()
 
   const onSubmit = (data: FieldValues) => {
