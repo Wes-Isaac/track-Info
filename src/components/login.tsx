@@ -36,7 +36,7 @@ export default function Login() {
         console.log(result)
         return
       }).catch((err)=>console.log(err))
-
+    }
   return (
     <div className='flex justify-center flex-col items-center h-screen'>
       <h1 className='text-3xl font-bold my-5'>Login</h1>
