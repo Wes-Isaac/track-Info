@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth,facebookAuthProvider,signInWithPopup } from '../lib/config';
+import { signInWithEmailAndPassword,signInWithPopup } from "firebase/auth";
+import { auth,facebookAuthProvider } from '../lib/config';
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
