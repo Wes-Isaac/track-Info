@@ -29,9 +29,9 @@ export default function Login() {
   }
 
 
-  const withFacebook = async () => {
+  const withFacebook =  () => {
     setLoading(true);
-    await signInWithPopup(auth, facebookAuthProvider)
+     signInWithPopup(auth, facebookAuthProvider)
       .then(async (result) => {
         console.log(result)
         return
