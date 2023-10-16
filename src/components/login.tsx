@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from '../lib/config';
+import { auth,facebookAuthProvider,signInWithPopup } from '../lib/config';
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
@@ -27,6 +27,16 @@ export default function Login() {
     reset()
 
   }
+
+
+  const withFacebook = async () => {
+    setLoading(true);
+    await signInWithPopup(auth, facebookAuthProvider)
+      .then(async (result) => {
+        console.log(result)
+        return
+      }).catch((err)=>console.log(err))
+
   return (
     <div className='flex justify-center flex-col items-center h-screen'>
       <h1 className='text-3xl font-bold my-5'>Login</h1>
@@ -50,6 +60,12 @@ export default function Login() {
           <input className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 mx-auto dark:hover:bg-blue-700 dark:focus:ring-blue-800 items-center self-center w-full" type="submit" value="Submit" />
         </div>
       </form>
+      <button
+        onClick={withFacebook}
+        className="py-3  cursor-pointer border border-slate-300 rounded-[35px] flex gap-2 items-center w-[80%] sm:w-[280px] justify-center"
+      >
+       <p>Continue with Facebook</p>
+      </button>
     </div>
 
   )
